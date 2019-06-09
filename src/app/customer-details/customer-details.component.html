@@ -1,0 +1,27 @@
+<h3><span class="glyphicon glyphicon-user"></span> Customer</h3>
+<div class="container order-management">
+  <div class="row">
+    <div class="col-md-12">
+      <h2><span class="customer-icon"><img src="../assets/images/customer-icon.png" /></span>Customer Information</h2>
+      <h3><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;Customer Details</h3>
+      <h3 class="customer-order"><span class="glyphicon glyphicon-wrench"></span>&nbsp;&nbsp;Customer Orders</h3>
+      <h3 class="edit-cutomer"><span class="glyphicon glyphicon-edit"></span>&nbsp;&nbsp;Edit Customer</h3>
+      <!-- show detailed view of a customer-->
+      <div class="show-details">
+        <h2><span class="customer-icon"><img src="../assets/images/customer-icon.png" height="80" /></span></h2>
+        <ul class="pull-left">
+          <li>{{employeeDetails.id}}</li>
+          <li>{{employeeDetails.employee_name}}</li>
+          <li>{{employeeDetails.employee_salary}}</li>
+          <li>{{employeeDetails.employee_age}}</li>
+        </ul>
+      </div>
+      <!-- Google map section -->
+      <div class="col-md-12 gMap">
+        <agm-map [latitude]="lat" [longitude]="lng">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+      </div>
+    </div>
+  </div>
+</div>

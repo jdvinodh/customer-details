@@ -1,0 +1,103 @@
+<h3><span class="glyphicon glyphicon-user"></span> Customers</h3>
+
+<div class="row">
+  <div class="col-md-12">
+    <h2><span class="customer-icon"><img src="../assets/images/customer-icon.png" /></span>Customers</h2>
+    <div class="navbar card-view-layout">
+      <ul class="nav navbar-nav">
+        <li class="toolbaritem" (click)="showCardView()">
+          <a>
+            <span class="glyphicon glyphicon-th-large"></span> Card View
+          </a>
+        </li>
+        <li class="toolbaritem" (click)="showListView()">
+          <a>
+            <span class="glyphicon glyphicon-align-justify"></span> List View
+          </a>
+        </li>
+        <li class="toolbaritem" [routerLink]="['/addEdit', 'Add']">
+          <a>
+            <span class="glyphicon glyphicon-plus"></span> Add Customer
+          </a>
+        </li>
+      </ul>
+      <!-- Filter -->
+      <form class="navbar-form navbar-right">
+        <div class="form-group">
+          <label class="navbarText col-sm-3">Filter:</label>
+          <div class="col-sm-9 search-button">
+            <input [(ngModel)]="searchText" name="searchText" autocomplete="off" placeholder="Search.."
+              class="advancedSearchTextbox">
+          </div>
+        </div>
+      </form>
+      <!-- End of filter -->
+    </div>
+  </div>
+</div>
+<div class="container">
+  <!-- card view -->
+  <div class="row cardContainer" *ngIf="cardView">
+    <div class="col-sm-6 col-md-4 col-lg-3"
+      *ngFor="let employee of employees |SearchFilter:searchText|   paginate: { itemsPerPage: 12, currentPage: card }"
+      let i="index">
+      <div class="card">
+
+        <div class="cardHeader"><span>{{employee.employee_name}}</span> <i class="icon-edit icon-white editIcon"></i>
+          <button class="btn close cardClose" (click)="deleteEmployee(employee.id)">&times;</button>
+          <span class="glyphicon glyphicon-edit customer-edit-icon cursorHand" (click)="editEmployee(employee)"></span>
+
+        </div>
+        <div class="cardBody">
+          <div class="clearfix">
+            <div class="pull-left cardBodyLeft">
+              <a href="#/customeredit/customer.id" class="white"><img src="../assets/images/customer-icon.png"
+                  class="cardImage" /></a>
+            </div>
+            <div class="pull-left cardBodyRight">
+              <div class="cardBodyContent">Eid: {{employee.id}}</div>
+              <div class="cardBodyContent">EAge: {{employee.employee_age}}</div>
+              <div>
+                <span (click)="viewEditDetails(employee)" class="btn-link cursorHand">
+                  View Details
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <pagination-controls (pageChange)="card = $event"></pagination-controls>
+  </div>
+
+  <!-- list view -->
+
+  <div class="col-md-12" *ngIf="tableView">
+    <div>
+      <table class="customer-table table">
+        <thead>
+          <tr>
+            <th *ngFor="let head of headElements">{{head}} </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let employee of employees |SearchFilter:searchText|   paginate: { itemsPerPage: 8, currentPage: list }"
+            let i="index">
+            <td>{{employee.id}}</td>
+            <td>{{employee.employee_name}}</td>
+            <td>{{employee.employee_age}}</td>
+            <td><a (click)="viewDetails(employee)"> view details</a></td>
+            <td>
+				<span class="glyphicon glyphicon-edit cursorHand"
+                (click)="editEmployee(employee)"></span> &nbsp;
+				<span (click)="deleteEmployee(employee.id,'delete')"
+                  class="glyphicon glyphicon-trash cursorHand"></span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <pagination-controls (pageChange)="list = $event"></pagination-controls>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+<div class="addoredit-view">
+  <h1 class="mLeft">{{addEdit}} Employee</h1>
+
+  <form class="form-horizontal" method="post" action="#" #employeeRegForm="ngForm">
+    <div class="form-group">
+      <label for="name" class="cols-sm-2 control-label">Employee Name</label>
+      <div class="cols-sm-10">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-user" aria-hidden="true"></i>
+          </span>
+          <input type="text" class="form-control" name="empName" id="empName" required #empName="ngModel"
+            [(ngModel)]="employeeDetails.employee_name" />
+
+        </div>
+        <div *ngIf="empName.invalid && (empName.dirty || empName.touched)" class="alert alert-danger">
+          <div *ngIf="empName.errors.required">
+            Name is required.
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+      <label for="age" class="cols-sm-2 control-label">Employee Age</label>
+      <div class="cols-sm-10">
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="fa fa-envelope fa" aria-hidden="true"></i>
+          </span>
+          <input type="text" class="form-control" name="empAge" id="employeeAge" required #empAge="ngModel"
+            [(ngModel)]="employeeDetails.employee_age" />
+        </div>
+
+        <div *ngIf="empAge.invalid && (empAge.dirty || empAge.touched)" class="alert alert-danger">
+          <div *ngIf="empAge.errors.required">
+            Age is required
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group pull-right">
+      <button type="button" class="btn mRight" [routerLink]="['/customer']">Cancel</button>
+      <button type="button" [disabled]="employeeRegForm.invalid" class="btn btn-primary"
+        (click)="AddEditCandidateDetails(employeeDetails, employeeRegForm)">Save</button>
+    </div>
+  </form>
+</div>
